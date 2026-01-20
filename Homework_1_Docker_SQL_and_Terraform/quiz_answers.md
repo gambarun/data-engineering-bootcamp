@@ -94,7 +94,8 @@ FROM (
       AND trip_distance <= 100
     GROUP BY TO_CHAR(lpep_pickup_datetime, 'YYYY-MM-DD')
 ) t
-ORDER BY trip_count DESC;
+ORDER BY trip_count DESC
+limit 1;
 ```
 
 ---
@@ -116,7 +117,8 @@ JOIN zones z
 WHERE lpep_pickup_datetime >= '2025-11-18'
   AND lpep_pickup_datetime < '2025-11-19'
 GROUP BY z."Zone"
-ORDER BY COUNT(*) DESC;
+ORDER BY COUNT(*) DESC
+limit 1;
 ```
 
 ---
@@ -142,7 +144,8 @@ WHERE lpep_pickup_datetime >= '2025-11-01'
   AND lpep_pickup_datetime < '2025-12-01'
   AND pu."Zone" = 'East Harlem North'
 GROUP BY z."Zone"
-ORDER BY trip_count DESC;
+ORDER BY trip_count DESC
+limit 1;
 ```
 
 ---
