@@ -1,11 +1,11 @@
-#`Homework_1_Docker_SQL_and_Terraform/quiz_answers.md`
+`Homework_1_Docker_SQL_and_Terraform/quiz_answers.md`
 
 ---
 
 ````markdown
-# Homework 1: Docker, SQL, and Terraform  
+Homework 1: Docker, SQL, and Terraform  
 **Data Engineering Zoomcamp 2026**
-
+````
 ---
 
 ## Question 1  
