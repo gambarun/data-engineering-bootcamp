@@ -128,15 +128,15 @@ limit 1;
 **For passengers picked up in the zone "East Harlem North" in November 2025, which was the drop off zone that had the largest tip?**
 
 **Answer:**
-**DOLocationID=236	"Upper East Side North"	$4242.00**
-But, I don't see this answer in options
+**Yorkville West**
+
 
 **SQL Query:**
 
 ```sql
-SELECT F."DOLocationID", z."Zone", ROUND(SUM(F."tip_amount")::INT, 2) as total_tip
+SELECT F."DOLocationID", z."Zone", F."tip_amount"
 FROM (
-SELECT * --y."DOLocationID", y."tip_amount"
+SELECT y."DOLocationID", y."tip_amount"
 FROM yellow_taxi_trips y
 JOIN zones pu
   ON y."PULocationID" = pu."LocationID"
@@ -145,8 +145,7 @@ WHERE lpep_pickup_datetime >= '2025-11-01'
   AND y."PULocationID" = 74 --pu."Zone" = 'East Harlem North'
 )F LEFT JOIN zones z
   ON F."DOLocationID" = z."LocationID"
-GROUP BY  F."DOLocationID", z."Zone" 
-ORDER BY ROUND(SUM(F."tip_amount")::BIGINT, 2) DESC
+ORDER BY F."tip_amount" DESC
 limit 1
 ```
 
