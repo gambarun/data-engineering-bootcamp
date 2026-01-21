@@ -125,7 +125,7 @@ limit 1;
 
 ## Question 6
 
-**For passengers picked up in the zone "East Harlem North" in November 2025, which drop-off zone had the largest number of trips?**
+**For passengers picked up in the zone "East Harlem North" in November 2025, which drop-off zone had the largest number of tips?**
 
 **Answer:**
 **East Harlem South (1,790 trips)**
@@ -133,19 +133,20 @@ limit 1;
 **SQL Query:**
 
 ```sql
-SELECT z."Zone" AS dropoff_zone,
-       COUNT(*) AS trip_count
+SELECT F."DOLocationID", z."Zone", ROUND(SUM(F."tip_amount")::INT, 2) as total_tip
+FROM (
+SELECT * --y."DOLocationID", y."tip_amount"
 FROM yellow_taxi_trips y
 JOIN zones pu
   ON y."PULocationID" = pu."LocationID"
-JOIN zones z
-  ON y."DOLocationID" = z."LocationID"
 WHERE lpep_pickup_datetime >= '2025-11-01'
   AND lpep_pickup_datetime < '2025-12-01'
-  AND pu."Zone" = 'East Harlem North'
-GROUP BY z."Zone"
-ORDER BY trip_count DESC
-limit 1;
+  AND y."PULocationID" = 74 --pu."Zone" = 'East Harlem North'
+)F LEFT JOIN zones z
+  ON F."DOLocationID" = z."LocationID"
+GROUP BY  F."DOLocationID", z."Zone" 
+ORDER BY ROUND(SUM(F."tip_amount")::BIGINT, 2) DESC
+limit 1
 ```
 
 ---
