@@ -128,7 +128,7 @@ limit 1;
 **For passengers picked up in the zone "East Harlem North" in November 2025, which was the drop off zone that had the largest tip?**
 
 **Answer:**
-**DOLocationID=236	"Upper East Side North"	$4242.00)**
+**DOLocationID=236	"Upper East Side North"	$4242.00**
 But, I don't see this answer in options
 
 **SQL Query:**
