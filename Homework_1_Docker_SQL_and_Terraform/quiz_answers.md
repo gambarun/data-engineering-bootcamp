@@ -97,7 +97,21 @@ FROM (
 ORDER BY trip_count DESC
 limit 1;
 ```
-
+--CORRECTED:
+```sql
+SELECT pickup_date, trip_distance
+FROM (
+    SELECT
+        TO_CHAR(lpep_pickup_datetime, 'YYYY-MM-DD') AS pickup_date,
+        max(trip_distance) AS trip_distance
+    FROM yellow_taxi_trips
+    WHERE lpep_pickup_datetime >= '2025-11-01'
+      AND lpep_pickup_datetime < '2025-12-01'
+      AND trip_distance <= 100
+    GROUP BY TO_CHAR(lpep_pickup_datetime, 'YYYY-MM-DD')
+) t
+ORDER BY trip_distance DESC
+```
 ---
 
 ## Question 5
